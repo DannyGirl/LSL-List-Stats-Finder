@@ -1,0 +1,38 @@
+list List = [6, 13, 26, 31, 9, 24, 11, 35];
+list sortedList;
+default
+{
+    state_entry()
+    {
+        llSetText("List Statistics Finder", <1, 1, 1>, 1.0);
+    }
+    touch_start(integer x)
+    {
+        llSay(0, "Sorted list in ascending order:");
+        sortedList = llListSort(List, 1, TRUE);
+        integer i;
+        integer total = llGetListLength(List);
+        for (; i<total; ++i)
+        {
+            llSay(0, llList2String(sortedList, i) + ", ");
+        }
+        llSleep(1.0);
+        
+        llSay(0, "Lowest number is " + 
+                (string)llListStatistics(LIST_STAT_MIN, List) + "\n" +                    
+                "Highest number is " +                  
+                (string)llListStatistics(LIST_STAT_MAX, List));
+        llSleep(1.0);
+        
+        llSay(0, "Count is " + 
+                (string)llListStatistics(LIST_STAT_NUM_COUNT, List) 
+                + "\n" + "Sum is " + 
+                (string)llListStatistics(LIST_STAT_SUM, List)
+                + "\n" + "Mean is " +
+                (string)llListStatistics(LIST_STAT_MEAN, List)
+                + "\n" + "Median is " +
+                (string)llListStatistics(LIST_STAT_MEDIAN, List)
+                + "\n" + "Range is " +
+                (string)llListStatistics(LIST_STAT_RANGE, List));
+    }
+}
